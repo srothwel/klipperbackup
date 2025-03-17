@@ -1,8 +1,5 @@
-#[include mmu/base/*.cfg]
-#[include mmu/addons/mmu_erec_cutter.cfg]
-#[include mmu/optional/client_macros.cfg]
-#[include shell_command.cfg]
-# Voron Design VORON2 250/300/350mm Spider TMC2209 UART config
+[include shell_command.cfg]
+## Voron Design VORON2 250/300/350mm Spider TMC2209 UART config
 
 ## *** THINGS TO CHANGE/CHECK: ***
 ## MCU paths							          [mcu] section
@@ -24,15 +21,14 @@ path: ~/printer_data/gcodes
 [include mainsail.cfg]
 [include nozzle_scrub.cfg]
 [include macros.cfg]
-[include eddy.cfg]
 #[include euclid.cfg]
-#[include klicky-probe.cfg]
+[include klicky-probe.cfg]
 #[include clean.cfg]
 #[include Adaptive_Mesh.cfg]
-#[include Line_Purge.cfg]
-#[include klicky_QGL.cfg]
-#[include KAMP_Settings.cfg]
-#[include autoz.cfg]
+[include Line_Purge.cfg]
+[include klicky_QGL.cfg]
+[include KAMP_Settings.cfg]
+[include autoz.cfg]
 [include expander.cfg]
 [include lights.cfg]
 [include stealthburner_leds.cfg]
@@ -43,8 +39,6 @@ path: ~/printer_data/gcodes
 [firmware_retraction]
 [exclude_object]
 [pause_resume] 
-[gcode_arcs]
-resolution: 1.0
 
 [force_move]
 enable_force_move:true
@@ -68,10 +62,9 @@ serial: /dev/serial/by-id/usb-Klipper_stm32f446xx_520057001951373434353332-if00
 
 [mcu EBBCan]
 canbus_uuid: 29d97d6da4ea
-[mcu eddy]
-canbus_uuid: 1a66192e15c7
-#[mcu MMBCan]
-#canbus_uuid: 1226560bf6b7
+
+[mcu MMBCan]
+canbus_uuid: 1226560bf6b7
 
 #[board_pins EBB36_GB1_v1.2]
 #mcu: can0
@@ -212,8 +205,7 @@ rotation_distance: 40
 gear_ratio: 80:16
 microsteps: 16
 ##  In Z- Position
-endstop_pin: probe:z_virtual_endstop
-#endstop_pin: ^PA0
+endstop_pin: ^PA0
 ##  Z-position of nozzle (in mm) to z-endstop trigger point relative to print surface (Z0)
 ##  (+) value = endstop above Z0, (-) value = endstop below
 ##	Increasing position_endstop brings nozzle closer to the bed
@@ -320,7 +312,6 @@ pid_Ki: 1.063
 pid_Kd: 108.982
 min_temp: 0
 max_temp: 250
-max_extrude_cross_section: 5
 ##	In E0-MOT Position
 
 pressure_advance: 0.056 #PLA 0.056 PETG 0.093
@@ -406,17 +397,17 @@ max_temp: 120
 
 [probe]
 ##    Euclid Probe
-#pin: EBBCan:PB5
-#x_offset: 0
-#y_offset: 25.0
+pin: EBBCan:PB5
+x_offset: 0
+y_offset: 25.0
 #z_offset: 3.207
-#speed: 5
-#samples: 2
-#samples_result: average
-#sample_retract_dist: 5.0
-#samples_tolerance: 0.050
-#samples_tolerance_retries: 3
-#lift_speed: 30
+speed: 5
+samples: 2
+samples_result: average
+sample_retract_dist: 5.0
+samples_tolerance: 0.050
+samples_tolerance_retries: 3
+lift_speed: 30
 
 #####################################################################
 #	Fan Control
@@ -678,6 +669,10 @@ max_adjust: 10
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [extruder]
+#*# control = pid
+#*# pid_kp = 23.191
+#*# pid_ki = 1.154
+#*# pid_kd = 116.537
 #*#
 #*# [heater_bed]
 #*# control = pid
@@ -686,77 +681,30 @@ max_adjust: 10
 #*# pid_kd = 388.093
 #*#
 #*# [stepper_z]
-#*# position_endstop = 2.813
+#*# position_endstop = 3.207
 #*#
 #*# [probe]
-#*# z_offset = 7.000
+#*# z_offset = 6.500
 #*#
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  0.139328, 0.132430, 0.121524, 0.110170, 0.120104, 0.132613, 0.131784, 0.151018, 0.136109
-#*# 	  0.125173, 0.121424, 0.110374, 0.095977, 0.107941, 0.113011, 0.124261, 0.121322, 0.107130
-#*# 	  0.106521, 0.105710, 0.096890, 0.072146, 0.084173, 0.099830, 0.132336, 0.113212, 0.102366
-#*# 	  0.069854, 0.088087, 0.080546, 0.064603, 0.071095, 0.078922, 0.125883, 0.094153, 0.090098
-#*# 	  0.071956, 0.099830, 0.122030, 0.066705, 0.063363, 0.071383, 0.084268, 0.088946, 0.097599
-#*# 	  0.053149, 0.061836, 0.094661, 0.062789, 0.054200, 0.057253, 0.078923, 0.071953, 0.082168
-#*# 	  0.057063, 0.054201, 0.037601, 0.045768, 0.044154, 0.057348, 0.063077, 0.062028, 0.062789
-#*# 	  0.088851, 0.083600, 0.080545, 0.080545, 0.085510, 0.076917, 0.079973, 0.081786, 0.071636
-#*# 	  0.106825, 0.104290, 0.086558, 0.077205, 0.096992, 0.087325, 0.100238, 0.091010, 0.087037
+#*# 	  -0.609250, -0.599250, -0.609250
+#*# 	  -0.574250, -0.589250, -0.596750
+#*# 	  -0.604250, -0.604250, -0.603000
 #*# tension = 0.2
-#*# min_x = 15.0
-#*# algo = bicubic
-#*# y_count = 9
+#*# min_x = 135.91
+#*# algo = lagrange
+#*# y_count = 3
 #*# mesh_y_pps = 2
-#*# min_y = 22.0
-#*# x_count = 9
-#*# max_y = 234.96000000000004
+#*# min_y = 118.82
+#*# x_count = 3
+#*# max_y = 179.16
 #*# mesh_x_pps = 2
-#*# max_x = 275.0
+#*# max_x = 159.07
 #*#
 #*# [input_shaper]
 #*# shaper_type_x = zv
 #*# shaper_freq_x = 48.8
 #*# shaper_type_y = mzv
 #*# shaper_freq_y = 36.4
-#*#
-#*# [probe_eddy_current btt_eddy]
-#*# reg_drive_current = 15
-#*# calibrate =
-#*# 	0.050000:3252472.214,0.090000:3251657.859,0.130000:3250764.809,
-#*# 	0.170000:3249917.457,0.210000:3248997.916,0.250000:3248146.942,
-#*# 	0.290000:3247319.037,0.330000:3246510.710,0.370000:3245691.780,
-#*# 	0.410000:3244903.971,0.450000:3244090.930,0.490000:3243325.301,
-#*# 	0.530000:3242604.468,0.570000:3241840.450,0.610000:3241141.056,
-#*# 	0.650000:3240453.839,0.690000:3239738.733,0.730000:3239042.677,
-#*# 	0.770000:3238393.525,0.810000:3237761.096,0.850000:3237103.041,
-#*# 	0.890000:3236443.042,0.930000:3235807.316,0.970000:3235223.338,
-#*# 	1.010000:3234609.586,1.050000:3234029.780,1.090000:3233463.016,
-#*# 	1.130000:3232903.315,1.170000:3232330.611,1.210000:3231794.972,
-#*# 	1.250000:3231251.249,1.290000:3230797.427,1.330000:3230226.628,
-#*# 	1.370000:3229727.723,1.410000:3229232.274,1.450000:3228743.591,
-#*# 	1.490000:3228259.409,1.530000:3227813.965,1.570000:3227339.902,
-#*# 	1.610000:3226917.207,1.650000:3226459.510,1.690000:3226036.295,
-#*# 	1.730000:3225594.535,1.770000:3225175.705,1.810000:3224776.820,
-#*# 	1.850000:3224402.044,1.890000:3223993.286,1.930000:3223630.748,
-#*# 	1.970000:3223241.717,2.010000:3222869.687,2.050000:3222504.756,
-#*# 	2.090000:3222161.082,2.130000:3221781.004,2.170000:3221455.462,
-#*# 	2.210000:3221127.033,2.250000:3220773.105,2.290000:3220469.082,
-#*# 	2.330000:3220145.531,2.370000:3219819.442,2.410000:3219523.475,
-#*# 	2.450000:3219209.161,2.490000:3218911.514,2.530000:3218605.585,
-#*# 	2.570000:3218324.149,2.610000:3218019.667,2.650000:3217755.620,
-#*# 	2.690000:3217451.815,2.730000:3217223.927,2.770000:3216921.125,
-#*# 	2.810000:3216666.531,2.850000:3216415.154,2.890000:3216176.927,
-#*# 	2.930000:3215908.776,2.970000:3215661.749,3.010000:3215397.883,
-#*# 	3.050000:3215197.104,3.090000:3214942.168,3.130000:3214727.878,
-#*# 	3.170000:3214505.396,3.210000:3214280.410,3.250000:3214066.401,
-#*# 	3.290000:3213857.966,3.330000:3213634.863,3.370000:3213431.181,
-#*# 	3.410000:3213227.851,3.450000:3213022.689,3.490000:3212818.671,
-#*# 	3.530000:3212622.970,3.570000:3212441.166,3.610000:3212268.035,
-#*# 	3.650000:3212075.079,3.690000:3211904.799,3.730000:3211715.455,
-#*# 	3.770000:3211536.310,3.810000:3211367.056,3.850000:3211184.302,
-#*# 	3.890000:3211039.694,3.930000:3210855.242,3.970000:3210678.975,
-#*# 	4.010000:3210533.681,4.050000:3210358.106
-#*#
-#*# [temperature_probe btt_eddy]
-#*# calibration_temp = 37.058716
